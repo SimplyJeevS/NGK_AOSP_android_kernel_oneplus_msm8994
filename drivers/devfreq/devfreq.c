@@ -43,6 +43,16 @@ static LIST_HEAD(devfreq_governor_list);
 static LIST_HEAD(devfreq_list);
 static DEFINE_MUTEX(devfreq_list_lock);
 
+#define WAKE_BOOST_DURATION_MS (3000)
+
+/* List of devices to boost when the screen is woken */
+static const char *boost_devices[] = {
+	"soc:qcom,cpubw",
+};
+
+static struct delayed_work wake_unboost_work;
+static struct work_struct wake_boost_work;
+
 /**
  * find_device_devfreq() - find devfreq struct using device pointer
  * @dev:	device pointer used to lookup device devfreq.
