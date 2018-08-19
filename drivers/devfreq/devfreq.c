@@ -25,6 +25,7 @@
 #include <linux/list.h>
 #include <linux/printk.h>
 #include <linux/hrtimer.h>
+#include <linux/module.h>
 #include "governor.h"
 
 static struct class *devfreq_class;
@@ -530,7 +531,6 @@ struct devfreq *devfreq_add_device(struct device *dev,
 			__func__);
 		goto err_init;
 	}
-
 	return devfreq;
 
 err_init:
